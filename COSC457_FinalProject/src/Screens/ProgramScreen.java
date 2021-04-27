@@ -36,6 +36,7 @@ public class ProgramScreen extends JFrame{
         
         //text areas
         JTextArea resultsArea = new JTextArea(5,5);
+        resultsArea.setEditable(false);
         
         //buttons
         JButton processBtn = new JButton("Perform Operation");

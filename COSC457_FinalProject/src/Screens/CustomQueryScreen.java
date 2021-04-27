@@ -36,6 +36,7 @@ public class CustomQueryScreen extends JFrame{
         
         //text area
         JTextArea resultsArea = new JTextArea(5,5);
+        resultsArea.setEditable(false);
         
         //buttons
         JButton processBtn = new JButton("Perform Operation");
