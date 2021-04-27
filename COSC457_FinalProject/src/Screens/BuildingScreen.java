@@ -11,6 +11,11 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -25,6 +30,11 @@ public class BuildingScreen extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true);
         setLayout(new BorderLayout());
+        
+        //sql connection stuff
+        final String ID = "root";
+        final String PW = "Cosc4572!";
+        final String SERVER = "jdbc:mysql://104.155.181.126:3306/mydb";
         
         //labels
         JLabel buildingNumLabel = new JLabel("Building Number:");
@@ -60,6 +70,27 @@ public class BuildingScreen extends JFrame{
             public void actionPerformed(ActionEvent e){
                 //TODO: add screen behavior logic here
                 try{
+                    //mor sql stuff
+                    try{
+                         Connection con = DriverManager.getConnection(SERVER, ID, PW);
+                         Statement stmt = con.createStatement();
+                         
+                         ResultSet rs = stmt.executeQuery("SELECT * FROM Building WHERE BuildingNumber = " + buildingNumField.getText());
+           
+                         if(rs.next()){
+                            String BN = rs.getString("BuildingNumber");
+                            String MNB = rs.getString("MaxNumberOfBeds");
+                            String BT = rs.getString("BuildingType");
+                            String result = ("Building Number: " + BN + " \nMax Number of Beds: " + MNB + "\nBuilding type: " + BT);
+                            resultsArea.setText(result);
+                         }
+                         else
+                             resultsArea.setText("Building doesn't exist");
+                    }catch(SQLException x){
+                        resultsArea.setText("" + x);
+        
+                   }
+               
                     
                 }
                 catch (Exception f){
