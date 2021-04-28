@@ -41,7 +41,9 @@ public class BuildingScreen extends JFrame{
         JLabel resultsLabel = new JLabel("Results:");
         
         //text fields
-        JTextField buildingNumField = new JTextField("",15);
+        String[] queries = {"1","2","3","4","5","6"};
+        JComboBox queryBox = new JComboBox(queries);
+        //JTextField buildingNumField = new JTextField("",15);
         
         //text areas
         JTextArea resultsArea = new JTextArea(5,5);
@@ -54,7 +56,7 @@ public class BuildingScreen extends JFrame{
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(2,2,5,5));
         topPanel.add(buildingNumLabel);
-        topPanel.add(buildingNumField);
+        topPanel.add(queryBox);
         topPanel.add(processBtn);
         add(topPanel, BorderLayout.NORTH);
         
@@ -76,7 +78,7 @@ public class BuildingScreen extends JFrame{
                          Connection con = DriverManager.getConnection(SERVER, ID, PW);
                          Statement stmt = con.createStatement();
                          
-                         ResultSet rs = stmt.executeQuery("SELECT * FROM Building WHERE BuildingNumber = " + buildingNumField.getText());
+                         ResultSet rs = stmt.executeQuery("SELECT * FROM Building WHERE BuildingNumber = " + (String)queryBox.getSelectedItem());
            
                          if(rs.next()){
                             String BN = rs.getString("BuildingNumber");
