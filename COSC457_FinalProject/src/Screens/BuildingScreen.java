@@ -68,40 +68,38 @@ public class BuildingScreen extends JFrame{
         add(bottomPanel, BorderLayout.CENTER);
         
         //this fires when the button is clicked
-        class ButtonListener implements ActionListener{
-            
-            public void actionPerformed(ActionEvent e){
+        class ButtonListener implements ActionListener {
+
+            public void actionPerformed(ActionEvent e) {
                 //TODO: add screen behavior logic here
-                try{
+                try {
                     //mor sql stuff
-                    try{
-                         Connection con = DriverManager.getConnection(SERVER, ID, PW);
-                         Statement stmt = con.createStatement();
-                         
-                         ResultSet rs = stmt.executeQuery("SELECT * FROM Building WHERE BuildingNumber = " + (String)queryBox.getSelectedItem());
-           
-                         if(rs.next()){
+                    try {
+                        Connection con = DriverManager.getConnection(SERVER, ID, PW);
+                        Statement stmt = con.createStatement();
+
+                        ResultSet rs = stmt.executeQuery("SELECT * FROM Building WHERE BuildingNumber = " + (String) queryBox.getSelectedItem());
+
+                        if (rs.next()) {
                             String BN = rs.getString("BuildingNumber");
                             String MNB = rs.getString("MaxNumberOfBeds");
                             String BT = rs.getString("BuildingType");
                             String result = ("Building Number: " + BN + " \nMax Number of Beds: " + MNB + "\nBuilding type: " + BT);
                             resultsArea.setText(result);
-                         }
-                         else
-                             resultsArea.setText("Building doesn't exist");
-                    }catch(SQLException x){
+                        } else {
+                            resultsArea.setText("Building doesn't exist");
+                        }
+                    } catch (SQLException x) {
                         resultsArea.setText("" + x);
-        
-                   }
-               
-                    
-                }
-                catch (Exception f){
+
+                    }
+
+                } catch (Exception f) {
                     JOptionPane.showMessageDialog(null, f.getMessage());
                 }
             }
         }
-        
+
         processBtn.addActionListener(new ButtonListener());
     }
 }
