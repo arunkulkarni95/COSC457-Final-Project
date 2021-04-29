@@ -85,7 +85,7 @@ public class PatientScreen extends JFrame {
                             new ViewPatientScreen(mrn);
                             break;
                         case "Update":
-                            //logic to update here
+                            new EditPatientScreen(mrn);
                             break;
                         case "Delete":
                             //logic to delete here
