@@ -100,7 +100,6 @@ public class CustomQueryScreen extends JFrame{
                     JOptionPane.showMessageDialog(null, f.getMessage());
                 }
             }
-        }
-        
+        }       
     }
 }
