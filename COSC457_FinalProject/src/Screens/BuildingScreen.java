@@ -41,7 +41,9 @@ public class BuildingScreen extends JFrame{
         JLabel resultsLabel = new JLabel("Results:");
         
         //text fields
-        JTextField buildingNumField = new JTextField("",15);
+        String[] queries = {"1","2","3","4","5","6"};
+        JComboBox queryBox = new JComboBox(queries);
+        //JTextField buildingNumField = new JTextField("",15);
         
         //text areas
         JTextArea resultsArea = new JTextArea(5,5);
@@ -54,7 +56,7 @@ public class BuildingScreen extends JFrame{
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(2,2,5,5));
         topPanel.add(buildingNumLabel);
-        topPanel.add(buildingNumField);
+        topPanel.add(queryBox);
         topPanel.add(processBtn);
         add(topPanel, BorderLayout.NORTH);
         
@@ -66,40 +68,38 @@ public class BuildingScreen extends JFrame{
         add(bottomPanel, BorderLayout.CENTER);
         
         //this fires when the button is clicked
-        class ButtonListener implements ActionListener{
-            
-            public void actionPerformed(ActionEvent e){
+        class ButtonListener implements ActionListener {
+
+            public void actionPerformed(ActionEvent e) {
                 //TODO: add screen behavior logic here
-                try{
+                try {
                     //mor sql stuff
-                    try{
-                         Connection con = DriverManager.getConnection(SERVER, ID, PW);
-                         Statement stmt = con.createStatement();
-                         
-                         ResultSet rs = stmt.executeQuery("SELECT * FROM Building WHERE BuildingNumber = " + buildingNumField.getText());
-           
-                         if(rs.next()){
+                    try {
+                        Connection con = DriverManager.getConnection(SERVER, ID, PW);
+                        Statement stmt = con.createStatement();
+
+                        ResultSet rs = stmt.executeQuery("SELECT * FROM Building WHERE BuildingNumber = " + (String) queryBox.getSelectedItem());
+
+                        if (rs.next()) {
                             String BN = rs.getString("BuildingNumber");
                             String MNB = rs.getString("MaxNumberOfBeds");
                             String BT = rs.getString("BuildingType");
                             String result = ("Building Number: " + BN + " \nMax Number of Beds: " + MNB + "\nBuilding type: " + BT);
                             resultsArea.setText(result);
-                         }
-                         else
-                             resultsArea.setText("Building doesn't exist");
-                    }catch(SQLException x){
+                        } else {
+                            resultsArea.setText("Building doesn't exist");
+                        }
+                    } catch (SQLException x) {
                         resultsArea.setText("" + x);
-        
-                   }
-               
-                    
-                }
-                catch (Exception f){
+
+                    }
+
+                } catch (Exception f) {
                     JOptionPane.showMessageDialog(null, f.getMessage());
                 }
             }
         }
-        
+
         processBtn.addActionListener(new ButtonListener());
     }
 }

@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class BuildingButtonListener implements ActionListener{
     
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         new BuildingScreen();
     }
 }
