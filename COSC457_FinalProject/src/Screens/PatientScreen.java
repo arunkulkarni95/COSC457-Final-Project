@@ -83,8 +83,20 @@ public class PatientScreen extends JFrame {
                     String selectedOption = (String) optionBox.getSelectedItem();
                     switch (selectedOption) {
                         case "Add":
-                            //logic to add here
-                            break;
+                            try {
+                            Connection conn = DriverManager.getConnection(SERVER, ID, PW);
+                            Statement stmt = conn.createStatement();
+                            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn);
+                            if(rs.next())
+                                resultsArea.setText("Patient already exists.  please use edit, view or delete");
+                            else{
+                                new AddPatientScreen(mrn);
+                            }
+
+                        } catch (SQLException x) {
+
+                        }
+                        break;
                         case "View":
                             new ViewPatientScreen(mrn);
                             break;
