@@ -31,6 +31,10 @@ public class PatientScreen extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setLayout(new BorderLayout());
+        
+        final String ID = "root";
+        final String PW = "Cosc4572!";
+        final String SERVER = "jdbc:mysql://104.155.181.126:3306/mydb";
 
         //labels
         JLabel optionLabel = new JLabel("Select option:");
@@ -88,8 +92,27 @@ public class PatientScreen extends JFrame {
                             new EditPatientScreen(mrn);
                             break;
                         case "Delete":
-                            //logic to delete here
-                            break;
+                            try {
+                                Connection conn = DriverManager.getConnection(SERVER, ID, PW);
+
+                                Statement stmt = conn.createStatement();
+                                String query = "DELETE  FROM MeetsWith WHERE PatientMRN = " + mrn + ";";
+                                stmt.executeUpdate(query);
+                                query = "DELETE  FROM Visit WHERE PatientMRN = " + mrn + ";";
+                                stmt.executeUpdate(query);
+                                query = "DELETE  FROM Guest WHERE PatientMRN = " + mrn + ";";
+                                stmt.executeUpdate(query);
+                                query = "DELETE  FROM EnrolledIn WHERE MRN = " + mrn + ";";
+                                stmt.executeUpdate(query);
+                                query = "DELETE  FROM Patients WHERE MRN = " + mrn + ";";
+                                stmt.executeUpdate(query);
+                                resultsArea.setText("Success");
+                                
+                             } catch (SQLException x) {
+                                 resultsArea.setText("" + x);
+
+                        }
+                        break;
                     }
                 } catch (Exception f) {
                     JOptionPane.showMessageDialog(null, f.getMessage());
