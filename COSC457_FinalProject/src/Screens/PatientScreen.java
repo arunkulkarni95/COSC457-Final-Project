@@ -86,7 +86,7 @@ public class PatientScreen extends JFrame {
                             try {
                             Connection conn = DriverManager.getConnection(SERVER, ID, PW);
                             Statement stmt = conn.createStatement();
-                            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn);
+                            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn + ";");
                             if(rs.next())
                                 resultsArea.setText("Patient already exists.  please use edit, view or delete");
                             else{
