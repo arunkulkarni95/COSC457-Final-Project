@@ -85,9 +85,7 @@ public class ViewStaffScreen extends JFrame {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM Staff WHERE EID = " + eid + ";");
-  
-                
-
+            
             if (rs.next()) {
                 String name = rs.getString("StaffName");
                 String phone = rs.getString("PhoneNumber");

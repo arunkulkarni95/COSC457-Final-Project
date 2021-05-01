@@ -159,13 +159,13 @@ public class AddStaffScreen extends JFrame {
                             String license = licField.getText();
                             
                             query2 = "INSERT INTO PatientCare (PatientCareEID) VALUES("+eid+");";
-                            query3 = " INSERT INTO Counselor (CounselorEID, Liscense) VALUES ("+eid+", '"+license+"');";
+                            query3 = "INSERT INTO Counselor (CounselorEID, Liscense) VALUES ("+eid+", '"+license+"');";
                             break;
                         case "SupportOther":
                             pid = "5";
                             
                             query2 = "INSERT INTO SupportStaff (SupportStaffID) VALUES("+eid+");";
-                            query3 = " INSERT INTO SupportStaffOther (SupportOtherEID) VALUES("+eid+");";
+                            query3 = "INSERT INTO SupportStaffOther (SupportOtherEID) VALUES("+eid+");";
                             break;
                         case "SupportStaff":
                             pid = "8";

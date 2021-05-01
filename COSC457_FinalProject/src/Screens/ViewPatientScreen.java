@@ -80,9 +80,7 @@ public class ViewPatientScreen extends JFrame {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn + ";");
-  
-                
-
+            
             if (rs.next()) {
                 String name = rs.getString("PatientName");
                 String address = rs.getString("Address");

@@ -82,7 +82,7 @@ public class EditPatientScreen extends JFrame {
 
             Statement stmt = conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn + ";");
 
             if (rs.next()) {
                 String name = rs.getString("PatientName");
