@@ -106,6 +106,7 @@ public class StaffScreen extends JFrame{
                             break;
                         case "View":
                             //logic to view here
+                            new ViewStaffScreen(eid);
                             break;
                         case "Update":
                             //logic to update here

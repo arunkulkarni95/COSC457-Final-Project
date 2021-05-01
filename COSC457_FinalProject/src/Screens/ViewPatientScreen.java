@@ -79,7 +79,7 @@ public class ViewPatientScreen extends JFrame {
 
             Statement stmt = conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn + ";");
   
                 
 
