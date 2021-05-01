@@ -84,19 +84,19 @@ public class PatientScreen extends JFrame {
                     switch (selectedOption) {
                         case "Add":
                             try {
-                            Connection conn = DriverManager.getConnection(SERVER, ID, PW);
-                            Statement stmt = conn.createStatement();
-                            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn + ";");
+                                Connection conn = DriverManager.getConnection(SERVER, ID, PW);
+                                Statement stmt = conn.createStatement();
+                                ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn + ";");
                             if(rs.next())
                                 resultsArea.setText("Patient already exists.  please use edit, view or delete");
                             else{
                                 new AddPatientScreen(mrn);
                             }
 
-                        } catch (SQLException x) {
+                            } catch (SQLException x) {
 
-                        }
-                        break;
+                            }
+                            break;
                         case "View":
                             new ViewPatientScreen(mrn);
                             break;
