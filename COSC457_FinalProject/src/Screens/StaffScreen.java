@@ -110,9 +110,11 @@ public class StaffScreen extends JFrame{
                             break;
                         case "Update":
                             //logic to update here
+                            new EditStaffScreen(eid);
                             break;
                         case "Delete":
                             //logic to delete here
+                            new DeleteStaffScreen(eid);
                             break;
                     }
                 }
