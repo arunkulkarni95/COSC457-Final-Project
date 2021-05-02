@@ -79,7 +79,11 @@ public class AssignVisit extends JFrame{
                             ResultSet rs = stmt.executeQuery("SELECT MAX(VisitNumber) m FROM Visit WHERE PatientMRN=\""+MRN+"\"");
                             String vNum;
                             if (rs.next()) {
-                                vNum = ""+(Integer.parseInt(rs.getString("m"))+1);
+                                if (rs.getString("m") != null) {
+                                    vNum = ""+(Integer.parseInt(rs.getString("m"))+1);
+                                } else {
+                                    vNum = "1";
+                                }
                             } else {
                                 vNum = "1";
                             }
