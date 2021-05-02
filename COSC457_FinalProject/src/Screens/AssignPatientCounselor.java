@@ -47,7 +47,7 @@ public class AssignPatientCounselor extends JFrame {
         final String SERVER = "jdbc:mysql://104.155.181.126:3306/mydb";
         //Labels
         JLabel patientMRN = new JLabel("Patient MRN: "+MRN);
-        JLabel counsEID = new JLabel("Counselor EID: ");
+        JLabel counsEID = new JLabel("Staff Member: ");
         JLabel notesL = new JLabel("Notes: ");
         JLabel dateL = new JLabel("Date: YYYY-MM-DD ");
         JLabel none = new JLabel("");
