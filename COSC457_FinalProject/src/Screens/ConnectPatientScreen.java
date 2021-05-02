@@ -46,7 +46,7 @@ public class ConnectPatientScreen extends JFrame{
 
         try {
             JLabel selectOpt = new JLabel("Select Option:");
-        JLabel patientMRN = new JLabel("Patient MRN:");
+        JLabel patientMRN = new JLabel("Patient Name:");
             Connection conn = DriverManager.getConnection(SERVER, ID, PW);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT MRN, PatientName FROM Patients;");
