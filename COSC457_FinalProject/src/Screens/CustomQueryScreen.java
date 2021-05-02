@@ -27,7 +27,7 @@ public class CustomQueryScreen extends JFrame{
         //init layout
         super("Rectangle");
         setTitle("Premade Custom Queries");
-        setSize(500,500);
+        setSize(700,500);
         setLocationRelativeTo(null);
         setVisible(true);
         setLayout(new BorderLayout());
@@ -41,7 +41,10 @@ public class CustomQueryScreen extends JFrame{
         JLabel resultsLabel = new JLabel("Results:");
         
         //comboBox
-        String[] queries = {"Query 1","Query 2","Query 3","Query 4","Query 5","Query 6","Query 7","Query 8","Query 9","Query 10"};
+        String[] queries = {"Visit Number of each patient assigned to Packet Margin","Name and Position ID of all staff, by dept. who work in Building #1","All current patients",
+                            "All patients enrolled in the Emerging Adult Program","All COVID-Negative patients with BCBS Insurance","Patient and Guest Names of all patients living in Building #3",
+                            "Counselors who meet with fewer than 10 patients","Notes of patients who have followed-up with Alumni Department",
+                            "Average salary of all drivers","All buildings with greater than 15 beds"};
         JComboBox queryBox = new JComboBox(queries);
         
         //text area
@@ -53,7 +56,7 @@ public class CustomQueryScreen extends JFrame{
         
         //top panel
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(2,2));
+        topPanel.setLayout(new GridLayout(4,1));
         topPanel.add(querySelect);
         topPanel.add(queryBox);
         topPanel.add(processBtn);
@@ -64,7 +67,7 @@ public class CustomQueryScreen extends JFrame{
         bottomPanel.setLayout(new GridLayout(2,1));
         bottomPanel.add(resultsLabel);
         bottomPanel.add(resultsArea);
-        add(bottomPanel, BorderLayout.CENTER);
+        topPanel.add(bottomPanel);
         
         //this fires when the button is clicked
         class ButtonListener implements ActionListener{
@@ -77,7 +80,7 @@ public class CustomQueryScreen extends JFrame{
                     Statement stmt = conn.createStatement();
                     String selectedOption = (String)queryBox.getSelectedItem();
                     switch (selectedOption){
-                        case "Query 1":
+                        case "Visit Number of each patient assigned to Packet Margin":
                             //perform query
                             ResultSet rs1 = stmt.executeQuery("SELECT visitNumber FROM Visit v WHERE EXISTS"
                                                             + "(SELECT * FROM MeetsWith m WHERE StaffEID = "
@@ -88,7 +91,7 @@ public class CustomQueryScreen extends JFrame{
                             }
                             resultsArea.setText("Visit Number of each patient assigned to Packet Margin:\n\n" + allResults);
                             break;
-                        case "Query 2":
+                        case "Name and Position ID of all staff, by dept. who work in Building #1":
                             //perform query
                             ResultSet rs2 = stmt.executeQuery("SELECT StaffName, PositionID FROM Staff WHERE"
                                                             + "(StaffBuildingNumber = 1) ORDER BY PositionID");
@@ -99,7 +102,7 @@ public class CustomQueryScreen extends JFrame{
                             }
                             resultsArea.setText("Name and Position ID of all staff, by dept. who work in Building #1\n\n" + allResults);
                             break;
-                        case "Query 3":
+                        case "All current patients":
                             //perform query
                             ResultSet rs3 = stmt.executeQuery("SELECT PatientName, MRN FROM Patients;");
                             while (rs3.next()){
@@ -110,7 +113,7 @@ public class CustomQueryScreen extends JFrame{
                             }
                             resultsArea.setText("All current patients:\n\n"+allResults);
                             break;
-                        case "Query 4":
+                        case "All patients enrolled in the Emerging Adult Program":
                             //perform query
                             ResultSet rs4 = stmt.executeQuery("SELECT PatientName, MRN FROM Patients p WHERE EXISTS"
                                                             + "(SELECT * FROM EnrolledIn e WHERE ProgramNumber="
@@ -122,7 +125,7 @@ public class CustomQueryScreen extends JFrame{
                             }
                             resultsArea.setText("Patient Name and MRN of all patients enrolled in the Emerging Adult Program:\n\n" + allResults);
                             break;
-                        case "Query 5":
+                        case "All COVID-Negative patients with BCBS Insurance":
                             //perform query
                             ResultSet rs5 = stmt.executeQuery("SELECT PatientName, MRN FROM Patients p WHERE Insurance=\"Blue Cross Blue Shield\" AND EXISTS"
                                                             + "(SELECT * FROM Visit v WHERE COVIDStatus = \"F\" AND p.MRN = v.PatientMRN);");
@@ -133,7 +136,7 @@ public class CustomQueryScreen extends JFrame{
                             }
                             resultsArea.setText("Patient Name and MRN of all COVID-Negative patients with BCBS Insurance:\n\n" + allResults);
                             break;
-                        case "Query 6":
+                        case "Patient and Guest Names of all patients living in Building #3":
                             //perform query
                             ResultSet rs6 = stmt.executeQuery("SELECT GuestName, PatientName FROM Guest g, Patients p, Bed b WHERE p.MRN=g.PatientMRN AND b.BedMRN = p.MRN AND b.BuildingNumber=3 ORDER BY p.PatientName;");
                             while (rs6.next()){
@@ -143,7 +146,7 @@ public class CustomQueryScreen extends JFrame{
                             }
                             resultsArea.setText("Patient and Guest Names of all patients living in Building #3:\n\n" + allResults);
                             break;
-                        case "Query 7":
+                        case "Counselors who meet with fewer than 10 patients":
                             //perform query
                             ResultSet rs7 = stmt.executeQuery("SELECT DISTINCT StaffName FROM Staff s, MeetsWith m, Patients p WHERE s.EID = m.StaffEID AND p.MRN = m.PatientMRN AND s.StaffType = \"Counselor\" "
                                                             + "AND EXISTS (SELECT pcount FROM (SELECT COUNT(PatientMRN) as pcount FROM Staff s, MeetsWith m, Patients p WHERE s.EID = m.StaffEID AND p.MRN = m.PatientMRN) counts "
@@ -154,7 +157,7 @@ public class CustomQueryScreen extends JFrame{
                             }
                             resultsArea.setText("Counselors who meet with fewer than 10 patients:\n\n" + allResults);
                             break;
-                        case "Query 8":
+                        case "Notes of patients who have followed-up with Alumni Department":
                             //perform query
                             ResultSet rs8 = stmt.executeQuery("SELECT Notes FROM FollowUp f, Patients p WHERE p.MRN IN (SELECT FollowUpMRN FROM FollowUp WHERE f.FollowUpMRN = p.MRN);");
                             while (rs8.next()){
@@ -163,7 +166,7 @@ public class CustomQueryScreen extends JFrame{
                             }
                             resultsArea.setText("Notes of patients who have followed-up with Alumni Department:\n\n" + allResults);
                             break;
-                        case "Query 9":
+                        case "Average salary of all drivers":
                             //perform query
                             ResultSet rs9 = stmt.executeQuery("SELECT AVG(SALARY) as AvgSalary FROM Staff, Driver WHERE EID = DriverEID;");
                             while (rs9.next()){
@@ -172,7 +175,7 @@ public class CustomQueryScreen extends JFrame{
                             }
                             resultsArea.setText("Average salary of all drivers:\n\n" + allResults);
                             break;
-                        case "Query 10":
+                        case "All buildings with greater than 15 beds":
                             //perform query
                             ResultSet rs10 = stmt.executeQuery("SELECT BuildingNumber, BuildingType FROM Building WHERE MaxNumberOfBeds > 15");
                             while (rs10.next()){
