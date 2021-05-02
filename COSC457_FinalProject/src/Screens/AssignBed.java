@@ -64,9 +64,7 @@ public class AssignBed extends JFrame{
             for (int i=0;i<asString.size();i++) {
                 opts[i] = bedToString(asString.get(i));
             }
-            for (int j=0;j<asString.size();j++) {
-                System.out.println(opts[j]);
-            }
+            
             JComboBox optionBox = new JComboBox(opts);
             panel.add(optionBox);
             JLabel res = new JLabel("");
