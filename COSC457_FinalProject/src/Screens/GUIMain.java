@@ -5,6 +5,7 @@
  */
 package Screens;
 
+import ListenersForMain.ConnectPatientListener;
 import ListenersForMain.*;
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +38,7 @@ public class GUIMain extends JFrame{
         JButton buildingBtn = new JButton("Building Information");
         JButton programBtn = new JButton("Program Information");
         JButton premadeQueriesBtn = new JButton("Premade Custom Queries");
-
+        JButton connectBtn = new JButton("Connect Patients");
         //text fields
         
         //set layout
@@ -52,6 +53,7 @@ public class GUIMain extends JFrame{
         buttonPanel.add(buildingBtn);
         buttonPanel.add(programBtn);
         buttonPanel.add(premadeQueriesBtn);
+        buttonPanel.add(connectBtn);
         
         add(buttonPanel, BorderLayout.CENTER);
         
@@ -64,5 +66,6 @@ public class GUIMain extends JFrame{
         buildingBtn.addActionListener(new BuildingButtonListener());
         programBtn.addActionListener(new ProgramButtonListener());
         premadeQueriesBtn.addActionListener(new CustomQueryButtonListener());
+        connectBtn.addActionListener(new ConnectPatientListener());
     } 
 }
