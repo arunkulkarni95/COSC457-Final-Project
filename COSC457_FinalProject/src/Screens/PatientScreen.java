@@ -120,7 +120,7 @@ public class PatientScreen extends JFrame {
                                 String phone = rs.getString("PhoneNumber");
                                 String lbs = rs.getString("LastBadgeSwipe");
                                 String emr = rs.getString("EMR");
-                                allPts = allPts + "\n" + "[" + pmrn + "] " + "[" + name + "] " + "[" + address + "] " + "[" + insurance + "] " + "[" + gender + "] " + "[" + ch + "] " + "[" + phone + "} " + "[" + lbs + "] " + "[" + emr + "]";
+                                allPts = allPts + "\n" + "[" + pmrn + "] " + "[" + name + "] " + "[" + address + "] " + "[" + insurance + "] " + "[" + gender + "] " + "[" + ch + "] " + "[" + phone + "] " + "[" + lbs + "] " + "[" + emr + "]";
 
                             }
                             resultsArea.setText(allPts);
