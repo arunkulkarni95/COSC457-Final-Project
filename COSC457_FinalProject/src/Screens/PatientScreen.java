@@ -27,7 +27,7 @@ public class PatientScreen extends JFrame {
         //init layout
         super("Rectangle");
         setTitle("Patient Information");
-        setSize(425, 350);
+        setSize(800, 600);
         setLocationRelativeTo(null);
         setVisible(true);
         setLayout(new BorderLayout());
@@ -45,14 +45,14 @@ public class PatientScreen extends JFrame {
         JTextField mrnField = new JTextField("", 15);
 
         //text areas
-        JTextArea resultsArea = new JTextArea(5, 5);
+        JTextArea resultsArea = new JTextArea(7, 7);
         resultsArea.setEditable(false);
 
         //buttons
         JButton processBtn = new JButton("Perform Operation");
 
         //initialize JComboBox
-        String options[] = {"Add", "View", "Update", "Delete"};
+        String options[] = {"Add", "View", "View All", "Update", "Delete"};
         JComboBox optionBox = new JComboBox(options);
 
         //top panel
@@ -68,7 +68,7 @@ public class PatientScreen extends JFrame {
         //bottom panel
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(2, 1));
-        bottomPanel.add(resultsLabel);
+        //bottomPanel.add(resultsLabel);
         bottomPanel.add(resultsArea);
         add(bottomPanel, BorderLayout.CENTER);
 
@@ -102,6 +102,33 @@ public class PatientScreen extends JFrame {
                             break;
                         case "Update":
                             new EditPatientScreen(mrn);
+                            break;
+                        case "View All":
+                            try {
+                                Connection conn = DriverManager.getConnection(SERVER, ID, PW);
+                                Statement stmt = conn.createStatement();
+                                ResultSet rs = stmt.executeQuery("SELECT * FROM Patients;");
+                                String allPts = "[MRN] [Name] [Address] [Insurance] [Gender] [Clinical Hours] [Phone Number] [Last Badge Swipe] [EMR]";
+                                while (rs.next()) {
+                                    String pmrn = rs.getString("MRN");
+                                    String name = rs.getString("PatientName");
+                                    String address = rs.getString("Address");
+                                    String insurance = rs.getString("Insurance");
+                                    String gender = rs.getString("Gender");
+                                    String ch = rs.getString("ClinicalHours");
+                                    String phone = rs.getString("PhoneNumber");
+                                    String lbs = rs.getString("LastBadgeSwipe");
+                                    String emr = rs.getString("EMR");
+                                    allPts = allPts +"\n" + "[" + pmrn + "] " + "[" + name + "] " + "[" + address + "] " + "[" + insurance + "] " + "[" + gender + "] " + "[" + ch + "] " + "[" + phone + "} " + "[" + lbs + "] " + "[" + emr + "]";
+                                    
+                                }
+                                resultsArea.setText(allPts);
+
+
+                            } catch (SQLException x) {
+
+                            }
+                            
                             break;
                         case "Delete":
                             try {
