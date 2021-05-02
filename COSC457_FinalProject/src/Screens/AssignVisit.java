@@ -30,7 +30,7 @@ import java.sql.ResultSet;
 public class AssignVisit extends JFrame{
     public AssignVisit(String MRN) {
         super("Rectangle");
-        setTitle("Connect Patients");
+        setTitle("Assign Visit");
         setSize(425, 350);
         setLocationRelativeTo(null);
         setVisible(true);

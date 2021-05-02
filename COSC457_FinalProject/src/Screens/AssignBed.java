@@ -35,7 +35,7 @@ import javax.swing.JPanel;
 public class AssignBed extends JFrame{
     public AssignBed(String MRN, String Gender) {
         super("Rectangle");
-        setTitle("Connect Patients");
+        setTitle("Assign Bed");
         setSize(425, 350);
         setLocationRelativeTo(null);
         setVisible(true);

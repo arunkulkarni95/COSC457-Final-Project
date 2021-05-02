@@ -81,7 +81,7 @@ public class ConnectPatientScreen extends JFrame{
                                     new AssignVisit(MRN);
                                     break;
                                 case "Meet with Counselor":
-                                    System.out.println("Assigned counselor");
+                                    new AssignPatientCounselor(MRN);
                                     break;
                                 default:
                                     break;
