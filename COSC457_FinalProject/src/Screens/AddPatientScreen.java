@@ -132,6 +132,7 @@ public class AddPatientScreen extends JFrame {
                             stmt.executeUpdate(query);
                             mrnField.setText("Success");
                         }
+                        conn.close();
 
                     } catch (SQLException x) {
                         mrnField.setText("" + x);

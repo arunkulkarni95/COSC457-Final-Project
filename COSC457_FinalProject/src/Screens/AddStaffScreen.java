@@ -215,6 +215,7 @@ public class AddStaffScreen extends JFrame {
                             }
                             eidField.setText("Success.");
                         }
+                        conn.close();
 
                     } catch (SQLException x) {
                         eidField.setText("" + x);

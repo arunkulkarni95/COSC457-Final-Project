@@ -84,19 +84,20 @@ public class PatientScreen extends JFrame {
                     switch (selectedOption) {
                         case "Add":
                             try {
-                                Connection conn = DriverManager.getConnection(SERVER, ID, PW);
-                                Statement stmt = conn.createStatement();
-                                ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn + ";");
-                            if(rs.next())
+                            Connection conn = DriverManager.getConnection(SERVER, ID, PW);
+                            Statement stmt = conn.createStatement();
+                            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients WHERE MRN = " + mrn + ";");
+                            if (rs.next()) {
                                 resultsArea.setText("Patient already exists.  please use edit, view or delete");
-                            else{
+                            } else {
                                 new AddPatientScreen(mrn);
                             }
+                            conn.close();
 
-                            } catch (SQLException x) {
+                        } catch (SQLException x) {
 
-                            }
-                            break;
+                        }
+                        break;
                         case "View":
                             new ViewPatientScreen(mrn);
                             break;
@@ -105,27 +106,27 @@ public class PatientScreen extends JFrame {
                             break;
                         case "View All":
                             try {
-                                Connection conn = DriverManager.getConnection(SERVER, ID, PW);
-                                Statement stmt = conn.createStatement();
-                                ResultSet rs = stmt.executeQuery("SELECT * FROM Patients;");
-                                String allPts = "[MRN] [Name] [Address] [Insurance] [Gender] [Clinical Hours] [Phone Number] [Last Badge Swipe] [EMR]";
-                                while (rs.next()) {
-                                    String pmrn = rs.getString("MRN");
-                                    String name = rs.getString("PatientName");
-                                    String address = rs.getString("Address");
-                                    String insurance = rs.getString("Insurance");
-                                    String gender = rs.getString("Gender");
-                                    String ch = rs.getString("ClinicalHours");
-                                    String phone = rs.getString("PhoneNumber");
-                                    String lbs = rs.getString("LastBadgeSwipe");
-                                    String emr = rs.getString("EMR");
-                                    allPts = allPts +"\n" + "[" + pmrn + "] " + "[" + name + "] " + "[" + address + "] " + "[" + insurance + "] " + "[" + gender + "] " + "[" + ch + "] " + "[" + phone + "} " + "[" + lbs + "] " + "[" + emr + "]";
-                                    
-                                }
-                                resultsArea.setText(allPts);
+                            Connection conn = DriverManager.getConnection(SERVER, ID, PW);
+                            Statement stmt = conn.createStatement();
+                            ResultSet rs = stmt.executeQuery("SELECT * FROM Patients;");
+                            String allPts = "[MRN] [Name] [Address] [Insurance] [Gender] [Clinical Hours] [Phone Number] [Last Badge Swipe] [EMR]";
+                            while (rs.next()) {
+                                String pmrn = rs.getString("MRN");
+                                String name = rs.getString("PatientName");
+                                String address = rs.getString("Address");
+                                String insurance = rs.getString("Insurance");
+                                String gender = rs.getString("Gender");
+                                String ch = rs.getString("ClinicalHours");
+                                String phone = rs.getString("PhoneNumber");
+                                String lbs = rs.getString("LastBadgeSwipe");
+                                String emr = rs.getString("EMR");
+                                allPts = allPts + "\n" + "[" + pmrn + "] " + "[" + name + "] " + "[" + address + "] " + "[" + insurance + "] " + "[" + gender + "] " + "[" + ch + "] " + "[" + phone + "} " + "[" + lbs + "] " + "[" + emr + "]";
 
+                            }
+                            resultsArea.setText(allPts);
+                            conn.close();
 
-                            } catch (SQLException x) {
+                        } catch (SQLException x) {
 
                             }
                             
@@ -146,6 +147,7 @@ public class PatientScreen extends JFrame {
                                 query = "DELETE  FROM Patients WHERE MRN = " + mrn + ";";
                                 stmt.executeUpdate(query);
                                 resultsArea.setText("Success");
+                                conn.close();
                                 
                              } catch (SQLException x) {
                                  resultsArea.setText("" + x);

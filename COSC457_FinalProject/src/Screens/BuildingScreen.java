@@ -89,6 +89,7 @@ public class BuildingScreen extends JFrame{
                         } else {
                             resultsArea.setText("Building doesn't exist");
                         }
+                        con.close();
                     } catch (SQLException x) {
                         resultsArea.setText("" + x);
 

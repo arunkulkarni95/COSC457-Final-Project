@@ -145,6 +145,7 @@ public class EditPatientScreen extends JFrame {
                 mrnField.setText(mrn);
                 nameField.setText("Patient doesn't exist");
             }
+            conn.close();
         } catch (SQLException x) {
             mrnField.setText("Internal Error");
             nameField.setText("" + x);

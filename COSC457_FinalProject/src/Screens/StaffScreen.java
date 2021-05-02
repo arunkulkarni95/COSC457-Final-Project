@@ -99,6 +99,7 @@ public class StaffScreen extends JFrame{
                             else{
                                 new AddStaffScreen(eid,jobType);
                             }
+                            conn.close();
 
                             } catch (SQLException x) {
 

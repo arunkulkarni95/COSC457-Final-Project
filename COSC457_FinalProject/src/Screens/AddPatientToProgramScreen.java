@@ -99,6 +99,7 @@ public class AddPatientToProgramScreen extends JFrame {
                             stmt.executeUpdate(query);
                             resultField.setText("Success");
                         }
+                        conn.close();
 
                     } catch (SQLException x) {
                         resultField.setText("" + x);
