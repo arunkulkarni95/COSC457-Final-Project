@@ -56,7 +56,7 @@ public class CustomQueryScreen extends JFrame{
         
         //top panel
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(4,1));
+        topPanel.setLayout(new GridLayout(3,1));
         topPanel.add(querySelect);
         topPanel.add(queryBox);
         topPanel.add(processBtn);
@@ -67,7 +67,7 @@ public class CustomQueryScreen extends JFrame{
         bottomPanel.setLayout(new GridLayout(2,1));
         bottomPanel.add(resultsLabel);
         bottomPanel.add(resultsArea);
-        topPanel.add(bottomPanel);
+        add(bottomPanel, BorderLayout.CENTER);
         
         //this fires when the button is clicked
         class ButtonListener implements ActionListener{
