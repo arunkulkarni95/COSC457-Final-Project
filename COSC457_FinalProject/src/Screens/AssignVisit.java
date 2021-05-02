@@ -100,6 +100,8 @@ public class AssignVisit extends JFrame{
                             ret.setText("Error!");
                             Logger.getLogger(MainCarter.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                    } else {
+                        ret.setText("Please make sure values are in the proper format.");
                     }
                     
                 }
