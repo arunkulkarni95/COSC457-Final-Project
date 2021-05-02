@@ -30,7 +30,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author retra
+ * @author Carter
  */
 public class AssignBed extends JFrame{
     public AssignBed(String MRN, String Gender) {

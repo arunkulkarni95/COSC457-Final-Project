@@ -75,11 +75,10 @@ public class ConnectPatientScreen extends JFrame{
                             String chosen = (String)optionBox.getSelectedItem();
                             switch (chosen) {
                                 case "Assign Bed":
-                                    System.out.println("Assigned bed");
                                     new AssignBed(MRN,gender);
                                     break;
                                 case "Assign Visit":
-                                    System.out.println("Assigned visit");
+                                    new AssignVisit(MRN);
                                     break;
                                 case "Meet with Counselor":
                                     System.out.println("Assigned counselor");
@@ -92,42 +91,6 @@ public class ConnectPatientScreen extends JFrame{
                             
                         }
                         conn.close();
-                        /*
-                        String jobType = (String)jobBox.getSelectedItem();
-                        String selectedOption = (String)optionBox.getSelectedItem();
-
-                        switch (selectedOption){
-                            case "Add":
-                                //logic to add here
-                                try {
-                                    Connection conn = DriverManager.getConnection(SERVER, ID, PW);
-                                    Statement stmt = conn.createStatement();
-                                    ResultSet rs = stmt.executeQuery("SELECT * FROM Staff WHERE EID = " + eid + ";");
-                                if(rs.next())
-                                    resultsArea.setText("Staff already exists. Please use edit, view or delete");
-                                else{
-                                    new AddStaffScreen(eid,jobType);
-                                }
-                                conn.close();
-
-                                } catch (SQLException x) {
-
-                                }
-                                break;
-                            case "View":
-                                //logic to view here
-                                new ViewStaffScreen(eid);
-                                break;
-                            case "Update":
-                                //logic to update here
-                                new EditStaffScreen(eid);
-                                break;
-                            case "Delete":
-                                //logic to delete here
-                                new DeleteStaffScreen(eid);
-                                break;
-                        }
-                        */
                     }
                 }
                 catch (Exception f){
