@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package Screens;
-import dbproject.MainCarter;
-import static dbproject.MainCarter.convertRSToString;
+import main.MainCarter;
+import static main.MainCarter.convertRSToString;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

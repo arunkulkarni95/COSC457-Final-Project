@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dbproject;
+package main;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -45,7 +45,7 @@ public class MainCarter {
             switch_tables.executeQuery("use "+"mydb");
             String stmt = "INSERT INTO table VALUES (";
             String args = "";
-            for (var i=0;i<L.size()-1;i++) {
+            for (int i=0;i<L.size()-1;i++) {
                 
                 args = args + "\'"+L.get(i)+"\'" + ", ";
             }

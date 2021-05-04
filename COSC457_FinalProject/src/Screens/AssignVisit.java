@@ -5,7 +5,7 @@
  */
 package Screens;
 
-import dbproject.MainCarter;
+import main.MainCarter;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

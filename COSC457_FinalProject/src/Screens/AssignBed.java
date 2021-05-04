@@ -5,8 +5,8 @@
  */
 package Screens;
 
-import dbproject.MainCarter;
-import static dbproject.MainCarter.convertRSToString;
+import main.MainCarter;
+import static main.MainCarter.convertRSToString;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
